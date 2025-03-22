@@ -1,0 +1,16 @@
+cleanup:
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment: UAT
+
+    steps: 
+      - name: "cleanup destination at ${{ vars.UAT_IP }}"
+        uses: Hoanghien120398/ssh-action@master
+        with:
+          host: ${{ vars.UAT_IP }}
+          port: ${{ vars.UAT_PORT }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            rm -rf ./deployment/*
+            rm -rf ${{ vars.UAT_TOMCAT }}/digi*
