@@ -12,7 +12,11 @@ jobs:
         with:
           repository: "HoangHien120398/selenium-java"
           ref: "main"
-          token: ${{secrets.PAT_TOKEN}}
+          token: ${{ secrets.PAT_TOKEN }}
+      - name: Debugging
+        run: |
+          echo "Secrets PAT_TOKEN: ${{ secrets.PAT_TOKEN }}"
+          echo "GitHub Context: ${{ toJson(github) }}"
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
